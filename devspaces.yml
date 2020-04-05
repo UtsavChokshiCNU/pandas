@@ -1,0 +1,74 @@
+name: pandas-devspace
+description: Devspace to build pandas code 
+# icon-file: yourlogo.png
+
+# By default we will look for a Dockerfile in this same
+# directory.
+docker-file: Dockerfile
+
+ports:
+ - protocol: http # can be udp|tcp|http
+   port-number: 8080
+   description: web app http port
+
+# environment-vars:
+#  - name: VAR_NAME
+#    value: VAR_VALUE
+#    description:
+#    shared: Yes  # when true, the value is shared when the DevSpace is shared. When false, a value must be supplied by someone this DevSpace is shared with
+
+# When you bind your DevSpace to a local directory, the files will be synchronized
+# betewen your workstation and the /data directory in your DevSpace container.
+# If there are files that should not be synced, such as large objects or logs,
+# configure an ignore directive here
+sync-ignore: |
+  .git
+  .idea
+  **/node_modules
+  .DS_Store
+  .data
+
+# DevSpaces Cloud Resources
+# -------------------------
+# Many of the cloud resources your application uses can be provisioned by DevSpaces and exposed
+# to your DevSpaces containers as environment variables. Adding configuration to the cloud-resources section
+# will result in the cloud resources being instantiated and connection information injected 
+# into all of the containers that are part of your DevSpace.
+#
+# Each cloud-resource has a name, a resource type, and a set of options (may be empty) that are 
+# used to create the cloud resource. Each cloud resource will have a defined set of environment
+# variables that are injected into all containers associated with the DevSpace. The cloud 
+# resource’s name will prefix all environment variables in order to uniquely identify the 
+# resource they belong to. 
+# 
+# The cloud resources currently supported are:
+# * Amazon Aurora Databases
+#     - resource type: aws-aurora
+#     - Options:
+#		- engineType:
+#  		  Type: String
+#  		  Default: pgsql
+#  		  AllowedValues: [pgsql, mysql5.6, mysql5.7]
+#  		  Description: “Type of Aurora DB instance. Use this values explicitly in `devspaces.yml` or default type will be used if ignored.”
+
+#		- DBPort: 
+#		  Default: 3306
+#		  Description: TCP/IP port for the database
+#		  Type: Number
+#		  MinValue: 1150
+#		  MaxValue: 65535
+#		  Description: "DB port. Can be customized in `devspaces.yml` or default port will be used if ignored."
+
+#     - Injected environment variables
+#	    * ${NAME}_host
+#	    * ${NAME}_port
+#	    * ${NAME}_username
+#	    * ${NAME}_password
+# *********************************************************
+# ---- Sample Config ----
+# cloud-resources:
+#     - name: OLTP_DB
+#       resource-type: aws-aurora
+#       resource-options:
+#		- engineType: pgsql
+#		- DBPort: 3307
